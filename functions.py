@@ -1,16 +1,15 @@
 from google.appengine.api import users
-
+from flask import render_template, Blueprint, url_for, \
+    redirect, flash, request, make_response
 
 def hello():
 	return "hello daniel"
 
+def get():
+    # Checks for active Google account session
+    user = users.get_current_user()
 
-def get(self):
-        # Checks for active Google account session
-        user = users.get_current_user()
-
-        if user:
-            self.response.headers['Content-Type'] = 'text/plain'
-            self.response.write('Hello, ' + user.nickname())
-        else:
-            self.redirect(users.create_login_url(self.request.uri))
+    if user:
+    	return "Hello " + user.nickname()
+    else:
+        return redirect(users.create_login_url(request.url))

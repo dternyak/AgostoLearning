@@ -2,6 +2,8 @@
 
 # Import the Flask Framework
 from flask import Flask
+from flask import render_template, Blueprint, url_for, \
+    redirect, flash, request, make_response
 
 import functions
 
@@ -12,7 +14,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return functions.hello()
+    return functions.get()
 
 
 @app.errorhandler(404)
