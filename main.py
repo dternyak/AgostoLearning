@@ -44,13 +44,7 @@ class Greeting(ndb.Model):
     content = ndb.StringProperty(indexed=False)
     date = ndb.DateTimeProperty(auto_now_add=True)
 
-def get():
-    guestbook_name = ('guestbook_name', DEFAULT_GUESTBOOK_NAME)
-    greetings_query = Greeting.query(
-        ancestor=guestbook_key(guestbook_name)).order(-Greeting.date)
-    greetings = greetings_query.fetch(10)
-    user = users.get_current_user()
-                
+
 
 def post(form):
     # We set the same parent key on the 'Greeting' to ensure each
