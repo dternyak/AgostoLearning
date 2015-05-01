@@ -12,6 +12,7 @@ from google.appengine.ext import ndb
 
 from forms import GuestBookForm
 from keys import SECRET_KEY
+import time
 
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
@@ -71,7 +72,9 @@ def post(form):
 
     query_params = {'guestbook_name': guestbook_name}
 
-    return "posted"
+    time.sleep(1)
+    return redirect(url_for('main'))
+
 
 
 ##################################################
@@ -89,22 +92,12 @@ def main():
     user = users.get_current_user()
     if user:
         form = GuestBookForm()
+        greetings = Greeting.query()
         return render_template("main.html",
-            form=form)
+            form=form, greetings=greetings, user=user)
     else:
         return redirect(users.create_login_url(request.url))
 
-@app.route('/posts', methods=['GET', 'POST'])
-def posts():
-    user = users.get_current_user()
-    greetings = Greeting.query()   
-
-    if user:
-        return render_template("posts.html",
-            greetings=greetings, 
-            user=user)
-    else:
-        return redirect(users.create_login_url(request.url))
 
 
 

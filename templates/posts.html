@@ -1,8 +1,10 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
 {% autoescape true %}
-<html>
-  <body>
-  <h1>Hi!</h1>
+<div class="container">
+  <h1>Hi! These are all the posts from different users.</h1>
+  <br>
     {% for greeting in greetings %}
       {% if greeting.author %}
         <b>{{ greeting.author.email }}
@@ -17,6 +19,6 @@
     {% endfor %}
     
 
-  </body>
-</html>
+</div>
 {% endautoescape %}
+{% endblock %}

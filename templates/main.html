@@ -1,11 +1,51 @@
-<!DOCTYPE html>
-   <html lang="en">
-   <head>
-  <body>
-<form method="POST" action="/">
+{% extends "base.html" %}
+
+{% block content %}
+{% autoescape true %}
+<div id="headerwrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+
+                    <div class="t">
+                    <h1>GuestBook</h1>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="add-task">
+    <h3>Add a New Post:</h3>
+    <br>
+<form method="POST" action="/" type="text">
   	{% for field in form %}
     	{{field}}
+    	<br>
+    	<br>
 	{% endfor %}
     </form>
-  </body>
-</html>
+
+  <br>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+ <div class="container centered">
+ <br>
+    {% for greeting in greetings %}
+
+      {% if greeting.author %}
+        <b>{{ greeting.author.email }}
+          {% if user and user.user_id() == greeting.author.identity %}
+            (You)
+          {% endif %}
+        </b> wrote:
+      {% else %}
+       An anonymous person wrote:
+      {% endif %}
+      <blockquote>{{ greeting.content }}</blockquote>
+    {% endfor %}
+    
+
+</div>
+{% endautoescape %}
+{% endblock %}
