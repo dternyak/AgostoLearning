@@ -5,3 +5,5 @@
 #
 # Note: The `lib` directory is added to `sys.path` by `appengine_config.py`.
 Flask==0.10
+WTForms==2.0.1
+Flask-WTF==0.10.2
