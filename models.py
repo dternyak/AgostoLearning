@@ -37,6 +37,10 @@ def post_ajax(first_value, second_value):
     # single entity group will be consistent. However, the write
     # rate to a single entity group should be limited to
     # ~1/second
+    if "!" in first_value:
+        first_value = first_value.replace("!", "")
+    if "!" in second_value:
+        second_value = second_value.replace("!", "")
     user = users.get_current_user()
     all_content = Greeting.query()
     for content in all_content:
@@ -63,6 +67,8 @@ def post(form):
                 email=users.get_current_user().email())
     
     form = str(form)
+    if "!" in form:
+        form = form.replace("!", "")
     greeting.content = form
     greeting.put()
 
