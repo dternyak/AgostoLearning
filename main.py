@@ -52,9 +52,7 @@ def addajax():
         for list_item in angular_dict.items():
             first_value = list_item[0]
             second_value = list_item[1]
-            print first_value
-            print second_value
-            post_ajax(first_value, second_value)
+            return post_ajax(first_value, second_value)
         
     else:
         return "post only"
