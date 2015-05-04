@@ -46,8 +46,8 @@ def post_ajax(first_value, second_value):
             print contents
             time.sleep(1)
             return "success"
-    else:
-        return "failure"
+        else:
+            return "failure"
 
 
 
