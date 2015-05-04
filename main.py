@@ -38,6 +38,7 @@ def add():
         form = GuestBookForm(request.form)
         if form.validate_on_submit():
             form = form.description.data
+            form = form.replace(" ", "_")
             post(form)
             return redirect(url_for('main'))
         else: 
@@ -52,9 +53,22 @@ def addajax():
         for list_item in angular_dict.items():
             first_value = list_item[0]
             second_value = list_item[1]
-            post_ajax(first_value, second_value)
-        time.sleep(3)
-        return "success"
+        user = users.get_current_user()
+        all_content = Greeting.query()
+        for contents in all_content:
+            if contents.content == first_value and user.user_id() == contents.author.identity:
+                second_value = second_value.replace(" ", "_")
+                contents.content = second_value
+                contents.put()
+                print contents
+                print "test"
+                time.sleep(1)
+                return "success"
+            else:
+                print first_value
+                print second_value
+                return "failure"
+
     else:
         return "post only"
 
