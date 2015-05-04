@@ -55,7 +55,7 @@ def addajax():
             print first_value
             print second_value
             post_ajax(first_value, second_value)
-        return "success"
+        
     else:
         return "post only"
 
