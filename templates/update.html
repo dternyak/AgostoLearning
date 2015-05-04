@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% autoescape true %}
+
+
+
+  <div class="section no-pad-bot" id="index-banner">
+
+
+
+
+<!-- SHOW DATA FROM INPUTS AS THEY ARE BEING TYPED -->
+
+
+      
+ <div class="container centered">
+ <h3>These are your editable posts:</h3>
+ <br>
+     
+
+    {% for greeting in greetings %}
+    <div id="name-group" class="form-group">
+    <div class="container centered">
+
+          {% if user and user.user_id() == greeting.author.identity %}
+            <form ng-submit="processForm()">
+            <p>
+    Old Post: {{ greeting.content }}</p>
+        <p>New Post: {% raw %}{{ formData.{% endraw %}{{greeting.content|replace(" ", "_")}}{% raw %}}}{% endraw %}</p>
+    </h3>
+    <input type="text" name="name" class="form-control" placeholder="{{greeting.content}}" ng-model='formData.{{greeting.content|replace(" ", "_")}}'>
+  </div>
+
+    <!-- SUBMIT BUTTON -->
+  <button type="submit" class="btn waves-effect waves-light">
+  
+    <span class="glyphicon glyphicon-flash"></span> Submit!
+  </button>
+
+</form>
+
+
+          {% endif %}
+          
+      
+      <br>
+    {% endfor %}
+    </div>
+    </div>
+    </div>
+    
+
+</div>
+
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="section">
+
+     
+
+    </div>
+    <br><br>
+
+    <div class="section">
+
+    </div>
+  </div>
+
+  <footer class="blog-footer">
+      <p>Built with DataStore, AppEngine and Angular</p>
+
+    </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="../../bin/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+  </body>
+</html>
+
+{% endautoescape %}
+
+{% endblock %}

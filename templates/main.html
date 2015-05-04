@@ -2,18 +2,7 @@
 
 {% block content %}
 {% autoescape true %}
-<nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">GuestBook</a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="#">Navbar Link</a></li>
-      </ul>
 
-      <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Navbar Link</a></li>
-      </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-    </div>
-  </nav>
 
 
   <div class="section no-pad-bot" id="index-banner">
@@ -22,7 +11,7 @@
       <h1 class="header center black-text">GuestBook</h1>
       <h5 style="color: black;">Sign the guestbook</h5>
       
-      <form method="POST" action="/" type="text">
+      <form method="POST" action="/add" type="text">
     {% for field in form %}
     <div class="container centered">
       {{field}}

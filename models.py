@@ -31,6 +31,21 @@ class Greeting(ndb.Model):
     content = ndb.StringProperty(indexed=False)
     date = ndb.DateTimeProperty(auto_now_add=True)
 
+def post_ajax(first_value, second_value):
+    # We set the same parent key on the 'Greeting' to ensure each
+    # Greeting is in the same entity group. Queries across the
+    # single entity group will be consistent. However, the write
+    # rate to a single entity group should be limited to
+    # ~1/second
+    user = users.get_current_user()
+    all_content = Greeting.query()
+    for content in all_content:
+        if content.content == first_value and user.user_id() == content.author.identity:
+            content.content = second_value
+            content.put()
+            print content
+
+
 
 
 def post(form):

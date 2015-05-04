@@ -6,10 +6,10 @@ from flask import render_template, Blueprint, url_for, \
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
-
+import json
 from forms import GuestBookForm
 from keys import SECRET_KEY
-from models import Author, Greeting, post
+from models import Author, Greeting, post, post_ajax
 import time
 
 app = Flask(__name__)
@@ -23,14 +23,6 @@ app.secret_key = SECRET_KEY
 
 @app.route('/', methods=['GET', 'POST'])
 def main():
-    if request.method == 'POST':
-        form = GuestBookForm(request.form)
-        if form.validate_on_submit():
-            form = form.description.data
-            post(form)
-            return redirect(url_for('main'))
-        else: 
-            return "must have some content"
     user = users.get_current_user()
     if user:
         form = GuestBookForm()
@@ -40,7 +32,42 @@ def main():
     else:
         return redirect(users.create_login_url(request.url))
 
+@app.route('/add', methods=['GET', 'POST'])
+def add():
+    if request.method == 'POST':
+        form = GuestBookForm(request.form)
+        if form.validate_on_submit():
+            form = form.description.data
+            post(form)
+            return redirect(url_for('main'))
+        else: 
+            return "must have some content"
+    else:
+        return "post only"
 
+@app.route('/addajax', methods=['GET', 'POST'])
+def addajax():
+    if request.method == 'POST':
+        angular_dict = request.form
+        for list_item in angular_dict.items():
+            first_value = list_item[0]
+            second_value = list_item[1]
+            print first_value
+            print second_value
+            post_ajax(first_value, second_value)
+        return "success"
+    else:
+        return "post only"
+
+@app.route('/update', methods=['GET', 'POST'])
+def update():
+    user = users.get_current_user()
+    if user:
+        greetings = Greeting.query()
+        return render_template("update.html",
+            greetings=greetings, user=user)
+    else:
+        return redirect(users.create_login_url(request.url))
 
 
 ###################################################
