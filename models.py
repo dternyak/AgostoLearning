@@ -37,18 +37,16 @@ def post_ajax(first_value, second_value):
     # single entity group will be consistent. However, the write
     # rate to a single entity group should be limited to
     # ~1/second
-    if "!" in first_value:
-        first_value = first_value.replace("!", "")
-    if "!" in second_value:
-        second_value = second_value.replace("!", "")
     user = users.get_current_user()
     all_content = Greeting.query()
-    for content in all_content:
-        if content.content == first_value and user.user_id() == content.author.identity:
-            content.content = second_value
-            content.put()
-            print content
-
+    for contents in all_content:
+        if contents.content == first_value and user.user_id() == contents.author.identity:
+            contents.content = second_value
+            contents.put()
+            print contents
+            time.sleep(1)
+    else:
+        return "failure"
 
 
 
@@ -67,12 +65,13 @@ def post(form):
                 email=users.get_current_user().email())
     
     form = str(form)
-    if "!" in form:
-        form = form.replace("!", "")
-    greeting.content = form
-    greeting.put()
+    if not "!" in form:
+        greeting.content = form
+        greeting.put()
 
-    query_params = {'guestbook_name': guestbook_name}
+        query_params = {'guestbook_name': guestbook_name}
 
-    time.sleep(1)
+        time.sleep(1)
+    else:
+        return "! is not allowed to be posted"
     
