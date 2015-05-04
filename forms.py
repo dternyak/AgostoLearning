@@ -7,4 +7,3 @@ from google.appengine.api import users
 
 class GuestBookForm(Form):
     description = TextField('Description', validators=[DataRequired()])
-    submit = SubmitField('Submit')

@@ -20,6 +20,15 @@
 
     <link href="{{url_for('static', filename='css/font-awesome.min.css')}}" rel="stylesheet">
 
+     <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+
+  <link href="{{url_for('static', filename='css/highestcss.css')}}" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
+          
      
      
      
@@ -41,7 +50,7 @@
     <![endif]-->
 
   </head>
-  <body>
+  <body ng-app>
 
     
       {% block content %}{% endblock %}

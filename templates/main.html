@@ -2,27 +2,41 @@
 
 {% block content %}
 {% autoescape true %}
-<div id="headerwrap">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
+<nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">GuestBook</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
 
-                    <div class="t">
-                    <h1>GuestBook</h1>
-                    </div>
-                    <br>
-                    <br>
-                    <div class="add-task">
-    <h3>Add a New Post:</h3>
-    <br>
-<form method="POST" action="/" type="text">
-  	{% for field in form %}
-    	{{field}}
-    	<br>
-    	<br>
-	{% endfor %}
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+    </div>
+  </nav>
+
+
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container centered">
+      <br><br>
+      <h1 class="header center black-text">GuestBook</h1>
+      <h5 style="color: black;">Sign the guestbook</h5>
+      
+      <form method="POST" action="/" type="text">
+    {% for field in form %}
+    <div class="container centered">
+      {{field}}
+      <br>
+      <br>
+      </div>
+
+  {% endfor %}
+   <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+    <i class="mdi-content-send right"></i>
+  </button>
     </form>
 
+  <br>
   <br>
   </div>
   </div>
@@ -30,7 +44,7 @@
   </div>
   </div>
  <div class="container centered">
- <h1>These are posts from users who visited the site:</h1>
+ <h3>These are posts from users who visited the site:</h3>
  <br>
     {% for greeting in greetings %}
 
@@ -48,5 +62,38 @@
     
 
 </div>
+
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="section">
+
+     
+
+    </div>
+    <br><br>
+
+    <div class="section">
+
+    </div>
+  </div>
+
+  <footer class="blog-footer">
+      <p>Built with DataStore, AppEngine and Angular</p>
+
+    </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="../../bin/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+  </body>
+</html>
+
+
 {% endautoescape %}
 {% endblock %}
