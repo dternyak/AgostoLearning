@@ -52,26 +52,30 @@ def addajax():
     if request.method == 'POST':
         print "posted"
         angular_dict = request.data
+
         print angular_dict
-        first_value = angular_dict.split("=", 1)[0]
-        second_value = angular_dict.split("=", 1)[1]
+        first_value = angular_dict.split("=")[0]
+        second_value = angular_dict.split("=")[1]
+        second_value = second_value.replace("+", " ")
+
         second_value = second_value.replace("!", "")
         second_value = second_value.replace(" ", "_")
         user = users.get_current_user()
         all_content = Greeting.query()
         for datastore in all_content:
+            print "start idnetical"
+            print datastore.content
+            print first_value
+            print "end identical"
             if datastore.content == first_value and user.user_id() == datastore.author.identity:
                 datastore.content = second_value
                 datastore.put()
                 print datastore
                 time.sleep(1)
                 return "success"
-            else:
-                print first_value
-                print second_value
-                print "testing daniel"
-                time.sleep(1)
-                return "nodomain"
+
+        time.sleep(1)
+        return "nodomain"
 
     else:
         return "post only"
