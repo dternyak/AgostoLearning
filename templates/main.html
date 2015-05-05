@@ -46,7 +46,7 @@
       {% else %}
        An anonymous person wrote:
       {% endif %}
-      <blockquote>{{ greeting.content }}</blockquote>
+      <blockquote>{{ greeting.content|replace("_", " ") }}</blockquote>
     {% endfor %}
     
 

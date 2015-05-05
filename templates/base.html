@@ -64,9 +64,12 @@ $scope.processForm = function() {
             alert("Done!")
 
       
-    } else {
+    } else if (data == "nodomain") {
       // if successful, bind success message to message
-      alert("Failed!")
+      alert("Failed!, nodomain ")
+    
+    } else {
+      alert("Failed")
     }
   });
 };

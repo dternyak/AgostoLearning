@@ -39,8 +39,7 @@ def add():
         if form.validate_on_submit():
             form = form.description.data
             form = form.replace(" ", "_")
-            if "!" in form:
-                form = form.replace("!", "")
+            form = form.replace("!", "")
             post(form)
             return redirect(url_for('main'))
         else: 
@@ -55,8 +54,7 @@ def addajax():
         for list_item in angular_dict.items():
             first_value = list_item[0]
             second_value = list_item[1]
-        if "!" in second_value:
-            second_value = second_value.replace("!", "")
+        second_value = second_value.replace("!", "")
         user = users.get_current_user()
         all_content = Greeting.query()
         for contents in all_content:
@@ -71,7 +69,7 @@ def addajax():
             else:
                 print first_value
                 print second_value
-                return "failure"
+                return "nodomain"
 
     else:
         return "post only"
