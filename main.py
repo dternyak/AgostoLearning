@@ -50,27 +50,28 @@ def add():
 @app.route('/addajax', methods=['GET', 'POST'])
 def addajax():
     if request.method == 'POST':
-        angular_dict = request.form
+        print "posted"
+        angular_dict = request.data
         print angular_dict
-        for list_item in angular_dict.items():
-            first_value = str(list_item[0])
-            second_value = str(list_item[1])
-            second_value = second_value.replace("!", "")
-            user = users.get_current_user()
-            all_content = Greeting.query()
-            for contents in all_content:
-                if contents.content == first_value and user.user_id() == contents.author.identity:
-                    second_value = second_value.replace(" ", "_")
-                    contents.content = second_value
-                    contents.put()
-                    print contents
-                    print "test"
-                    time.sleep(1)
-                    return "success"
-                else:
-                    print first_value
-                    print second_value
-                    return "nodomain"
+        first_value = angular_dict.split("=", 1)[0]
+        second_value = angular_dict.split("=", 1)[1]
+        second_value = second_value.replace("!", "")
+        second_value = second_value.replace(" ", "_")
+        user = users.get_current_user()
+        all_content = Greeting.query()
+        for datastore in all_content:
+            if datastore.content == first_value and user.user_id() == datastore.author.identity:
+                datastore.content = second_value
+                datastore.put()
+                print datastore
+                time.sleep(1)
+                return "success"
+            else:
+                print first_value
+                print second_value
+                print "testing daniel"
+                time.sleep(1)
+                return "nodomain"
 
     else:
         return "post only"
